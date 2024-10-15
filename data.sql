@@ -1,17 +1,17 @@
 -- Создание таблицы Исполнитель 
-CREATE TABLE Artist (
+CREATE TABLE  if NOT EXISTS Artist (
     ID SERIAL PRIMARY KEY,
     Name VARCHAR(255) NOT NULL
 );
 
 -- Создание таблицы Жанр 
-CREATE TABLE Genre (
+CREATE TABLE if NOT EXISTS Genre (
     ID SERIAL PRIMARY KEY,
     Name VARCHAR(255) NOT NULL
 );
 
 -- Создание таблицы Исполнитель_Жанр 
-CREATE TABLE ArtistGenre (
+CREATE TABLE if NOT EXISTS ArtistGenre (
     ID SERIAL PRIMARY KEY,
     ArtistID INT REFERENCES Artist(ID) ON DELETE CASCADE,
     GenreID INT REFERENCES Genre(ID) ON DELETE CASCADE,
@@ -19,14 +19,14 @@ CREATE TABLE ArtistGenre (
 );
 
 -- Создание таблицы Альбом
-CREATE TABLE Album (
+CREATE TABLE if NOT EXISTS Album (
     ID SERIAL PRIMARY KEY,
     Name VARCHAR(255) NOT NULL,
     ReleaseYear INT
 );
 
 -- Создание таблицы Исполнитель_Альбом 
-CREATE TABLE ArtistAlbum (
+CREATE TABLE if NOT EXISTS ArtistAlbum (
     ID SERIAL PRIMARY KEY,
     ArtistID INT REFERENCES Artist(ID) ON DELETE CASCADE,
     AlbumID INT REFERENCES Album(ID) ON DELETE CASCADE,
@@ -34,7 +34,7 @@ CREATE TABLE ArtistAlbum (
 );
 
 -- Создание таблицы Трек 
-CREATE TABLE Track (
+CREATE TABLE if NOT EXISTS Track (
     ID SERIAL PRIMARY KEY,
     Name VARCHAR(255) NOT NULL,
     Duration INT,  
@@ -42,16 +42,17 @@ CREATE TABLE Track (
 );
 
 -- Создание таблицы Сборник 
-CREATE TABLE Compilation (
+CREATE TABLE if NOT EXISTS Compilation (
     ID SERIAL PRIMARY KEY,
     Name VARCHAR(255) NOT NULL,
     ReleaseYear INT
 );
 
 -- Создание таблицы Сборник_Трек
-CREATE TABLE CompilationTrack (
+CREATE TABLE if NOT EXISTS CompilationTrack (
     ID SERIAL PRIMARY KEY,
     CompilationID INT REFERENCES Compilation(ID) ON DELETE CASCADE,
     TrackID INT REFERENCES Track(ID) ON DELETE CASCADE,
     UNIQUE (CompilationID, TrackID)  
 );
+
